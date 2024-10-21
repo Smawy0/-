@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>النظام السماوي - نظام الصقل</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e1e;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #2c2c2c;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            color: #6a11cb;
+            font-size: 2.5em;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: #fff;
+            margin: 0 20px;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+
+        .section {
+            padding: 20px;
+            margin: 20px;
+            background-color: #2c2c2c;
+            border-radius: 10px;
+        }
+
+        .section h2 {
+            color: #6a11cb;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .skills, .missions, .shop {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: #444;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 10px;
+            width: 300px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            background-color: #6a11cb;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .card p {
+            color: #ddd;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #2c2c2c;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>النظام السماوي</h1>
+</header>
+
+<nav>
+    <a href="#skills">المهارات</a>
+    <a href="#missions">المهمات</a>
+    <a href="#shop">المتجر</a>
+    <a href="#profile">الملف الشخصي</a>
+</nav>
+
+<!-- Skills Section -->
+<div id="skills" class="section">
+    <h2>المهارات</h2>
+    <div class="skills">
+        <div class="card">
+            <h3>ضربة البداية</h3>
+            <p>تقنية قتالية تتيح لك تنفيذ أول ضربة في المعركة.</p>
+            <p>التكلفة: 50 نقاط</p>
+            <button onclick="buySkill('ضربة البداية', 50)">شراء المهارة</button>
+        </div>
+        <div class="card">
+            <h3>درع القوة</h3>
+            <p>زيادة الحماية من هجمات الأعداء.</p>
+            <p>التكلفة: 75 نقاط</p>
+            <button onclick="buySkill('درع القوة', 75)">شراء المهارة</button>
+        </div>
+    </div>
+</div>
+
+<!-- Missions Section -->
+<div id="missions" class="section">
+    <h2>المهمات</h2>
+    <div class="missions">
+        <div class="card">
+            <h3>مهمة التدريب على السيف</h3>
+            <p>أكمل التدريب على السيف لمدة 30 دقيقة.</p>
+            <p>المكافأة: 100 نقاط</p>
+            <button onclick="completeMission(100)">قبول المهمة</button>
+        </div>
+        <div class="card">
+            <h3>مهمة التأمل</h3>
+            <p>قم بالتأمل لمدة ساعة لزيادة القوة الداخلية.</p>
+            <p>المكافأة: 150 نقاط</p>
+            <button onclick="completeMission(150)">قبول المهمة</button>
+        </div>
+    </div>
+</div>
+
+<!-- Shop Section -->
+<div id="shop" class="section">
+    <h2>المتجر</h2>
+    <div class="shop">
+        <div class="card">
+            <h3>سيف التنين</h3>
+            <p>سيف يزيد من الهجمات بشكل كبير.</p>
+            <p>السعر: 500 نقاط</p>
+            <button onclick="buyItem('سيف التنين', 500)">شراء</button>
+        </div>
+        <div class="card">
+            <h3>درع غير مرئي</h3>
+            <p>يقدم حماية عالية دون أن يراه الأعداء.</p>
+            <p>السعر: 700 نقاط</p>
+            <button onclick="buyItem('درع غير مرئي', 700)">شراء</button>
+        </div>
+    </div>
+</div>
+
+<!-- Profile Section -->
+<div id="profile" class="section">
+    <h2>الملف الشخصي</h2>
+    <div class="card">
+        <h3>اسم المستخدم: محمد</h3>
+        <p>المستوى: <span id="level">1</span></p>
+        <p>النقاط المتاحة: <span id="points">1000</span></p>
+    </div>
+</div>
+
+<div class="footer">
+    <p>&copy; 2024 النظام السماوي - جميع الحقوق محفوظة.</p>
+</div>
+
+<!-- JavaScript Code -->
+<script>
+    var points = 1000;
+    var level = 1;
+
+    function buySkill(skillName, cost) {
+        if (points >= cost) {
+            points -= cost;
+            alert("لقد اشتريت المهارة: " + skillName);
+            updateProfile();
+        } else {
+            alert("ليس لديك نقاط كافية!");
+        }
+    }
+
+    function completeMission(reward) {
+        points += reward;
+        alert("لقد أكملت المهمة! ربحت " + reward + " نقاط.");
+        updateProfile();
+    }
+
+    function buyItem(itemName, price) {
+        if (points >= price) {
+            points -= price;
+            alert("لقد اشتريت العنصر: " + itemName);
+            updateProfile();
+        } else {
+            alert("ليس لديك نقاط كافية!");
+        }
+    }
+
+    function updateProfile() {
+        document.getElementById("points").textContent = points;
+        if (points >= 2000) {
+            level = 2;
+        } else if (points >= 3000) {
+            level = 3;
+        }
+        document.getElementById("level").textContent = level;
+    }
+</script>
+
+</body>
+</html>
